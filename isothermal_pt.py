@@ -8,7 +8,7 @@ V_e0 = 0.00005
 V_es = 0.1*V_e0
 V_b0 = 0.00005
 V_bs = 0.1*V_b0
-phi = 60
+phi = 30
 pi = np.pi
 f = 50
 T_h = 300
@@ -17,13 +17,14 @@ P_0 = 2*10**6
 
 V_reg = 0.25*pi*0.045**2*0.065*0.7
 V_hot = 0.1*V_reg
-V_pul = 0.025*pi*0.024**2*0.1
+V_pul = 0.25*pi*0.024**2*0.1
 V_cold = 0.1*V_pul
-V_pon = 1.25
+V_pon = 1.28
 V_g0 = V_pul*V_pon
 T_reg = (T_h - T_c)/np.log(T_h/T_c)
 R = 2078.5
-V_T = V_hot/T_h + V_reg/T_reg + V_cold/T_c
+#V_T = V_hot/T_h + V_reg/T_reg + V_cold/T_c
+V_T = 5.2419280772182*10**-7
 nt = 360
 dt = 1/f/nt
 nx = 26
@@ -92,28 +93,28 @@ plt.show()
 
 deltaP = P[:,25] - P[:,23]
 
-f = open('data.txt','w')
-f.write('V_cs '+str(V_cs)+'\n')
-f.write('V_c0 '+str(V_c0)+'\n')
-f.write('V_es '+str(V_es)+'\n')
-f.write('V_e0 '+str(V_e0)+'\n')
-f.write('V_bs '+str(V_b0)+'\n')
-f.write('phi '+str(phi)+'\n')
-f.write('PI '+str(pi)+'\n')
-f.write('F '+str(f)+'\n')
-f.write('T_h '+str(T_h)+'\n')
-f.write('T_c '+str(T_c)+'\n')
-f.write('V_cold '+str(V_cold)+'\n')
-f.write('V_pul '+str(V_pul)+'\n')
-f.write('V_g0 '+str(V_g0)+'\n')
-f.write('T_reg '+str(T_reg)+'\n')
-f.write('R '+str(R)+'\n')
-f.write('V_pon '+str(V_pon)+'\n')
-f.write('V_T '+str(V_T)+'\n')
-f.write('dt '+str(dt)+'\n')
+data = open('data.txt','w')
+data.write('V_cs '+str(V_cs)+'\n')
+data.write('V_c0 '+str(V_c0)+'\n')
+data.write('V_es '+str(V_es)+'\n')
+data.write('V_e0 '+str(V_e0)+'\n')
+data.write('V_bs '+str(V_bs)+'\n')
+data.write('phi '+str(phi)+'\n')
+data.write('PI '+str(pi)+'\n')
+data.write('F '+str(f)+'\n')
+data.write('T_h '+str(T_h)+'\n')
+data.write('T_c '+str(T_c)+'\n')
+data.write('V_cold '+str(V_cold)+'\n')
+data.write('V_pul '+str(V_pul)+'\n')
+data.write('V_g0 '+str(V_g0)+'\n')
+data.write('T_reg '+str(T_reg)+'\n')
+data.write('R '+str(R)+'\n')
+data.write('V_pon '+str(V_pon)+'\n')
+data.write('V_T '+str(V_T)+'\n')
+data.write('dt '+str(dt)+'\n')
 
 # f.write('num phi V_c V_e V_b P11 P12 P21 P22 P31 P32 P41 P42 P51 P52 P52-P42 P61 P62 P62-P52 P71 P72 P72-P62 P81 P82 P82-P72 P91 P92 P92-P82 P101 P102')
 
 for line in P:
-	print(*line,file=f)
-f.close()
+	print(*line,file=data)
+data.close()
