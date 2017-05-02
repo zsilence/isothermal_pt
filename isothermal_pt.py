@@ -103,7 +103,7 @@ f.write('PI '+str(pi)+'\n')
 f.write('F '+str(f)+'\n')
 f.write('T_h '+str(T_h)+'\n')
 f.write('T_c '+str(T_c)+'\n')
-f.write('V_c '+str(V_c)+'\n')
+f.write('V_cold '+str(V_cold)+'\n')
 f.write('V_pul '+str(V_pul)+'\n')
 f.write('V_g0 '+str(V_g0)+'\n')
 f.write('T_reg '+str(T_reg)+'\n')
@@ -112,5 +112,8 @@ f.write('V_pon '+str(V_pon)+'\n')
 f.write('V_T '+str(V_T)+'\n')
 f.write('dt '+str(dt)+'\n')
 
-f.write('num phi V_c V_e V_b P11 P12 P21 P22 P31 P32 P41 P42 P51 P52 P52-P42 P61 P62 P62-P52 P71 P72 P72-P62 P81 P82 P82-P72 P91 P92 P92-P82 P101 P102')
+# f.write('num phi V_c V_e V_b P11 P12 P21 P22 P31 P32 P41 P42 P51 P52 P52-P42 P61 P62 P62-P52 P71 P72 P72-P62 P81 P82 P82-P72 P91 P92 P92-P82 P101 P102')
+
+for line in P:
+	print(*line,file=f)
 f.close()
