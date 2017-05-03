@@ -44,10 +44,22 @@ for i in range(2,11,2):
     P[:,i] = 1/((V_c+V_b)/T_h+V_T+(V_pul+V_e-V_g0*(P[:,i-1]/P_0)**-0.6)/T_c)
     P[:,i+1] = P[:,i]*P_0/np.mean(P[:,i])
 
-for i in range(12,25,2):
+for i in range(12,17,2):
     P[:,i] = 1/((V_c+V_b)/T_h+V_T+(V_pul+V_e-V_g0*(0.5*(P[:,i-1]+P[:,i-3])/P_0)**-0.6)/T_c)
     P[:,i+1] = P[:,i]*P_0/np.mean(P[:,i])
 
+for i in range(18,19,2):
+    P[:,i] = 1/((V_c+V_b)/T_h+V_T+(V_pul+V_e-V_g0*(0.5*(P[:,i-1]+P[:,i-5])/P_0)**-0.6)/T_c)
+    P[:,i+1] = P[:,i]*P_0/np.mean(P[:,i])
+
+for i in range(20,23,2):
+    P[:,i] = 1/((V_c+V_b)/T_h+V_T+(V_pul+V_e-V_g0*(0.5*(P[:,i-1]+P[:,i-3])/P_0)**-0.6)/T_c)
+    P[:,i+1] = P[:,i]*P_0/np.mean(P[:,i])
+
+for i in range(24,25,2):
+    P[:,i] = 1/((V_c+V_b)/T_h+V_T+(V_pul+V_e-V_g0*(0.5*(P[:,i-1]+P[:,i-5])/P_0)**-0.6)/T_c)
+    P[:,i+1] = P[:,i]*P_0/np.mean(P[:,i])
+    
 V_ge = np.zeros(nt)
 V_ge = V_pul + V_e - V_g0*(P[:,25]/P_0)**-0.6
 M_cold = P[:,25]*(V_c+V_ge)/(R*T_c)
@@ -91,6 +103,15 @@ plt.legend()
 plt.show()
 
 deltaP = P[:,25] - P[:,23]
+plt.figure(4)
+fig, ax1 = plt.subplots()
+ax1.plot(n,deltaP,label = 'deltaP')
+ax1.legend()
+ax2 = ax1.twinx()
+ax2.plot(n,V_ge,'r',label = 'V_ge')
+plt.legend()
+fig.tight_layout()
+plt.show()
 
 data = open('data.txt','w')
 data.write('V_cs '+str(V_cs)+'\n')
@@ -111,8 +132,6 @@ data.write('R '+str(R)+'\n')
 data.write('V_pon '+str(V_pon)+'\n')
 data.write('V_T '+str(V_T)+'\n')
 data.write('dt '+str(dt)+'\n')
-
-# f.write('num phi V_c V_e V_b P11 P12 P21 P22 P31 P32 P41 P42 P51 P52 P52-P42 P61 P62 P62-P52 P71 P72 P72-P62 P81 P82 P82-P72 P91 P92 P92-P82 P101 P102')
 
 for line in P:
 	print(*line,file=data)
