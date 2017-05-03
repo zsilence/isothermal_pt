@@ -45,7 +45,7 @@ for i in range(2,11,2):
     P[:,i+1] = P[:,i]*P_0/np.mean(P[:,i])
 
 for i in range(12,25,2):
-    P[:,i] = 1/((V_c+V_b)/T_h+V_T+(V_pul+V_e-V_g0*(0.5*(P[:,i-1]+P[:,i-5]))**-0.6)/T_c)
+    P[:,i] = 1/((V_c+V_b)/T_h+V_T+(V_pul+V_e-V_g0*(0.5*(P[:,i-1]+P[:,i-3])/P_0)**-0.6)/T_c)
     P[:,i+1] = P[:,i]*P_0/np.mean(P[:,i])
 
 V_ge = np.zeros(nt)
