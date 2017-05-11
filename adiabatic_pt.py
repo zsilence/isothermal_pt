@@ -1,6 +1,7 @@
 # This is an Isothermal PT model
 import numpy as np
 import matplotlib.pyplot as plt
+import P_iteration as P_i
 
 V_c0 = 0.0001
 V_cs = 0.1*V_c0
@@ -41,8 +42,7 @@ P = np.zeros((nt,nx))
 P[:,0] = 1/((V_c+V_b)/T_h+V_T+(V_pul+V_e)/T_c)
 P[:,1] = P[:,0]*P_0/np.mean(P[:,0])
 for i in range(2,11,2):
-    P[:,i] = 1/((V_c+V_b)/T_h+V_T+(V_pul+V_e-V_g0*(P[:,i-1]/P_0)**-0.6)/T_c)
-    P[:,i+1] = P[:,i]*P_0/np.mean(P[:,i])
+    P[:,i],P[:,i+1] = P_i.P_iteration(V_c,V_b,V_T,V_pul,V_e,V_g0,P[:,i-1],P_0)
 
 for i in range(12,17,2):
     P[:,i] = 1/((V_c+V_b)/T_h+V_T+(V_pul+V_e-V_g0*(0.5*(P[:,i-1]+P[:,i-3])/P_0)**-0.6)/T_c)
